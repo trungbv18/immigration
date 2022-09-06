@@ -1,5 +1,7 @@
 package com.example.immigration.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -18,6 +20,10 @@ public class ImmigrationInformation {
     @Column(name = "return_date")
     private Date returnDate;
 
+    @Basic
+    @Column(name = "start_date")
+    @CreationTimestamp
+    private Date startDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
@@ -61,9 +67,13 @@ public class ImmigrationInformation {
         this.returnDate = returnDate;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
 
-
-
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
     @Override
     public boolean equals(Object o) {
