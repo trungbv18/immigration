@@ -1,5 +1,6 @@
 package com.example.immigration.model;
 
+import com.example.immigration.Users.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
+@Table(name = "license")
 public class License {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

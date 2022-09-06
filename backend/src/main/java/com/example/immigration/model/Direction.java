@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "direction")
 public class Direction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "type_of_license", schema = "dbo", catalog = "Immigration")
+@Table(name = "type_of_license")
 public class TypeOfLicense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
