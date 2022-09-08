@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/license")
+@CrossOrigin(value = "*", maxAge = 3600)
+
 public class LicenseController {
     @Autowired
     LicenseServiceImpl licenseService;
@@ -39,6 +41,11 @@ public class LicenseController {
             return ResponseEntity.ok("Deleted license with id = "+id);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/last-id")
+    public ResponseEntity<Long> getLastId(){
+        Long id = licenseService.getLastId();
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
 
 

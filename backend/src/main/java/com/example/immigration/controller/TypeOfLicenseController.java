@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/typeOfLicense")
+@CrossOrigin(value = "*", maxAge = 3600)
+
 public class TypeOfLicenseController {
     @Autowired
     TypeOfLicenseServiceImpl typeOfLicenseService;

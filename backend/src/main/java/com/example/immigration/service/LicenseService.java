@@ -15,4 +15,6 @@ public interface LicenseService {
     void deleteLicenseById(Long id);
 
     Optional<License> getLicenseById(Long id);
+    Long getLastId();
+
 }

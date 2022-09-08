@@ -1,10 +1,12 @@
 package com.example.immigration.service;
 
+import com.example.immigration.model.License;
 import com.example.immigration.model.Purpose;
 import com.example.immigration.repository.PurposeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,6 +33,11 @@ public class PurposeServiceImpl implements PurposeService{
     @Override
     public Optional<Purpose> getPurposeById(Long id) {
         return purposeRepository.findById(id);
+    }
+
+    @Override
+    public List<Purpose> getAllPurpose() {
+        return purposeRepository.findAll();
     }
 
 

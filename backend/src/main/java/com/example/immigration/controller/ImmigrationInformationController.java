@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/immigrationInformation")
+@CrossOrigin(value = "*", maxAge = 3600)
+
 public class ImmigrationInformationController {
     @Autowired
     ImmigrationInformationServiceImpl immigrationInformationService;

@@ -15,6 +15,12 @@ public class LicenseServiceImpl implements LicenseService{
 
 
     @Override
+    public Long getLastId() {
+        return licenseRepository.selectLastId();
+
+    }
+
+    @Override
     public List<License> getAllLicense() {
         return licenseRepository.findAll();
     }

@@ -21,14 +21,14 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+//    @NotBlank
     @Size(max = 20)
     private String username;
-    @NotBlank
+//    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
-    @NotBlank
+//    @NotBlank
     @Size(max = 120)
     private String password;
     @Basic

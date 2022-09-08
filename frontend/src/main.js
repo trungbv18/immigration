@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createWebHistory, createRouter } from "vue-router";
+import store from "./components/store";
 
 // styles
 
@@ -38,6 +39,7 @@ import Register from "@/views/auth/Register.vue";
 
 import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
+import License from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
 
 // routes
@@ -116,6 +118,12 @@ const routes = [
   {
     path: "/profile",
     component: Profile,
+    meta: { requiresAuth: true },
+
+  },
+  {
+    path: "/license",
+    component: License,
   },
   {
     path: "/",
@@ -129,5 +137,17 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+router.beforeEach((to, from, next) => {
+  // const publicPages = ['/booking-detail/:id','/login', '/register', '/' ,'/booking', '/auth/login'];
+  // const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (to.meta.requiresAuth && !loggedIn) {
+    next('/auth/login');
+  } else {
+    next();
+  }
+});
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(store).mount("#app");
