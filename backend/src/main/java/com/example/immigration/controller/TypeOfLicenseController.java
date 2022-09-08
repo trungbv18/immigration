@@ -7,23 +7,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/typeOfLicense")
+@RequestMapping("/api/typeOfLicense")
 public class TypeOfLicenseController {
     @Autowired
     TypeOfLicenseServiceImpl typeOfLicenseService;
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<List<TypeOfLicense>> getAllTypeOfLicense(){
         List<TypeOfLicense> typeOfLicenses = typeOfLicenseService.getAllTypeOfLicense();
         return new ResponseEntity<>(typeOfLicenses, HttpStatus.OK);
     }
-    @PostMapping
-    public ResponseEntity<TypeOfLicense> addTypeOfLicense(@RequestBody TypeOfLicense typeOfLicense){
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ResponseEntity<TypeOfLicense> addTypeOfLicense(@Valid @RequestBody TypeOfLicense typeOfLicense){
         return new ResponseEntity<>(typeOfLicenseService.saveTypeOfLicense(typeOfLicense),HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public Object deleteLicense(@PathVariable("id") Integer id){
         if(typeOfLicenseService.getTypeOfLicenseById(id).isPresent()){

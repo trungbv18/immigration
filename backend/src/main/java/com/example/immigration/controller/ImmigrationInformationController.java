@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,13 +17,13 @@ public class ImmigrationInformationController {
     ImmigrationInformationServiceImpl immigrationInformationService;
 
     @PostMapping
-    public ResponseEntity<ImmigrationInformation> addImmigrationInformation(@RequestBody ImmigrationInformation immigration){
+    public ResponseEntity<ImmigrationInformation> addImmigrationInformation(@Valid @RequestBody ImmigrationInformation immigration){
          immigrationInformationService.saveImmigration(immigration);
          return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ImmigrationInformation> updateImmigration(@PathVariable("id") Long id, @RequestBody ImmigrationInformation immigration){
+    public ResponseEntity<ImmigrationInformation> updateImmigration(@PathVariable("id") Long id, @Valid @RequestBody ImmigrationInformation immigration){
         if(immigrationInformationService.getImmigrationById(id).isPresent()){
             immigrationInformationService.updateImmigrationById(immigration, id);
             return  ResponseEntity.ok(immigrationInformationService.updateImmigrationById(immigration, id));

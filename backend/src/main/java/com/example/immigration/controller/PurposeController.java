@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/purposes")
 public class PurposeController {
@@ -14,11 +16,11 @@ public class PurposeController {
     PurposeServiceImpl purposeService;
 
     @PostMapping
-    public ResponseEntity<Purpose> addPurpose(@RequestBody Purpose purpose){
+    public ResponseEntity<Purpose> addPurpose(@Valid @RequestBody Purpose purpose){
         return ResponseEntity.ok(purposeService.savePurpose(purpose));
     }
     @PutMapping("update/{id}")
-    public ResponseEntity<Purpose> updatePurpose(@RequestBody Purpose purpose, @PathVariable("id") Long id){
+    public ResponseEntity<Purpose> updatePurpose(@Valid @RequestBody Purpose purpose, @PathVariable("id") Long id){
         if(purposeService.getPurposeById(id).isPresent()){
             purposeService.updatePurpose(purpose,id);
             return ResponseEntity.ok(purpose);

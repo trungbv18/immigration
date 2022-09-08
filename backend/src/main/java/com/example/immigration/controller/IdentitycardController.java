@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class IdentitycardController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Identitycard> save(
+    public ResponseEntity<Identitycard> save( @Valid
             @RequestBody Identitycard identitycard
     ) {
         try {
@@ -36,7 +37,7 @@ public class IdentitycardController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Identitycard> update(
+    public ResponseEntity<Identitycard> update( @Valid
             @PathVariable("id") Long id,
             @RequestBody Identitycard identitycard
     ) {

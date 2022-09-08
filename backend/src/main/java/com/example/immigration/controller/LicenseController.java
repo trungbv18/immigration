@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,12 +21,12 @@ public class LicenseController {
         List<License> licenses = licenseService.getAllLicense();
         return new ResponseEntity<>(licenses, HttpStatus.OK);
     }
-    @PostMapping
-    public ResponseEntity<License> addLicense(@RequestBody License license){
+    @PostMapping("")
+    public ResponseEntity<License> addLicense(@Valid @RequestBody License license){
         return new ResponseEntity<>(licenseService.saveLicense(license),HttpStatus.OK) ;
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<License> updateLicense(@RequestBody License license,@PathVariable("id") Long id ){
+    public ResponseEntity<License> updateLicense(@Valid @RequestBody License license,@PathVariable("id") Long id ){
         if(licenseService.getLicenseById(id).isPresent()){
             licenseService.updateLicense(license,id);
             return ResponseEntity.ok(license);

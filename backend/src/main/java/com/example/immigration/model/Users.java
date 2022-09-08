@@ -1,16 +1,19 @@
 package com.example.immigration.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(	name = "users",
         uniqueConstraints = {
@@ -21,14 +24,14 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotEmpty(message = "username is mandatory")
     @Size(max = 20)
     private String username;
-    @NotBlank
+    @NotEmpty(message = "email is mandatory")
     @Size(max = 50)
     @Email
     private String email;
-    @NotBlank
+    @NotEmpty(message = "password is mandatory")
     @Size(max = 120)
     private String password;
     @Basic
@@ -45,16 +48,14 @@ public class Users {
     private Date dateOfBirth;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> roles = new HashSet<>();
-    public Users() {
-    }
+
     public Users(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
 }
 

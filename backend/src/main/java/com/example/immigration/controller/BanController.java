@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,7 @@ public class BanController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Ban> save(
-            @RequestBody Ban ban
-    ) {
+    public ResponseEntity<Ban> save(@Valid @RequestBody Ban ban) {
         try {
             banService.save(ban);
             return ResponseEntity.ok(ban);
@@ -36,8 +35,7 @@ public class BanController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Ban> update(
-            @PathVariable("id") Long id,
+    public ResponseEntity<Ban> update(@Valid @PathVariable("id") Long id,
             @RequestBody Ban newBan
     ) {
         Optional<Ban> ban = banService.findById(id);
