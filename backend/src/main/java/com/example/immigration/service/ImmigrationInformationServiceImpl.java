@@ -47,100 +47,91 @@ public class ImmigrationInformationServiceImpl implements ImmigrationInformation
 
     //Thong tin xuat nhap canh theo laoi giay to
     @Override
-    public List<ImmigrationInformation> getImmigrationInforByCardName(String typeOfCardName) {
-        return immigrationRepository.ImmigrationInformationByCardName(typeOfCardName);
+    public Long countImmigrationByCardName(String typeOfCardName) {
+        return immigrationRepository.countImmigrationByCardName(typeOfCardName);
     }
 
-    //Thong tin xuat nhap canh trong ngày theo laoi giay to
+    //Thong ke lượt  xuat nhap canh trong ngày theo laoi giay to
     @Override
-    public List<ImmigrationInformation> getImmigrationInforOnDayByCarName(String typeOfCardName) {
-        Date date = new  java.util.Date();
-        List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationInformationByCardName(typeOfCardName);
+    public Integer getImmigrationInforByDayByCardName(String typeOfCardName, Date from, Date to) {
+        List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationByCardName(typeOfCardName);
         List<ImmigrationInformation> immigrationsOnDay = new ArrayList<>();
-        Date finalDate = date;
         immigrations.forEach(i->{
-            if(     i.getStartDate().getDate() == finalDate.getDate()
-                    && i.getStartDate().getMonth() == finalDate.getMonth()
-                    && i.getStartDate().getYear() == finalDate.getYear()){
+            if(from.compareTo(i.getStartDate())<=0 &&i.getStartDate().compareTo(to)<=0 ){
                 immigrationsOnDay.add(i);
             }
         });
-        return immigrationsOnDay;
+        return immigrationsOnDay.size();
     }
 
     //Thông tin xuât nhập cảnh theo quốc tịch
     @Override
-    public List<ImmigrationInformation> ImmigrationInformationByNationality(String nationality) {
-        return immigrationRepository.ImmigrationInformationByNationality(nationality);
+    public Long countImmigrationByNationality(String nationality ) {
+        return immigrationRepository.countImmigrationByNationality(nationality);
     }
 
-    //Thông tin xuất nhập cảnh trong ngày theo quốc tịch
+    //Thông tin xuất nhập cảnh theo ngày theo quốc tịch
     @Override
-    public List<ImmigrationInformation> ImmigrationInforOnDayByNationality(String nationality) {
-        Date date = new  java.util.Date();
+    public Integer countImmigrationByDayByNationality(String nationality, Date from, Date to) {
         List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationInformationByNationality(nationality);
-        List<ImmigrationInformation> immigrationsOnDay = new ArrayList<>();
-        Date finalDate = date;
+        List<ImmigrationInformation> immigrationsByDay = new ArrayList<>();
         immigrations.forEach(i->{
-            if(     i.getStartDate().getDate() == finalDate.getDate()
-                    && i.getStartDate().getMonth() == finalDate.getMonth()
-                    && i.getStartDate().getYear() == finalDate.getYear()){
-                immigrationsOnDay.add(i);
+            if(from.compareTo(i.getStartDate())<=0 &&i.getStartDate().compareTo(to)<=0 ){
+                immigrationsByDay.add(i);
             }
         });
-        return immigrationsOnDay;
+        return immigrationsByDay.size();
     }
 
     //Thông tin xuất nhập cảnh theo loại giấy phép
     @Override
-    public List<ImmigrationInformation> ImmigrationInformationByTypeOfLicense(String typeOfLicense) {
-        return immigrationRepository.ImmigrationInformationByTypeOfLicense(typeOfLicense);
+    public  Long countImmigrationByTypeOfLicense(String typeOfLicense) {
+        return immigrationRepository.countImmigrationByTypeOfLicense(typeOfLicense);
     }
 
-    //Thông tin xuất nhập cảnh trong ngày theo loại giấy phép
+    //Thông tin xuất nhập cảnh theo ngày theo loại giấy phép
     @Override
-    public List<ImmigrationInformation> ImmigrationInforOnDayByTypeOfLicense(String typeOfLicense) {
-        Date date = new java.util.Date();
+    public Integer countImmigrationByDayByTypeOfLicense(String typeOfLicense , Date from, Date to) {
         List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationInformationByTypeOfLicense(typeOfLicense);
-        List<ImmigrationInformation> immigrationsOnDay = new ArrayList<>();
-        Date finalDate = date;
-        immigrations.forEach(i -> {
-            if (i.getStartDate().getDate() == finalDate.getDate()
-                    && i.getStartDate().getMonth() == finalDate.getMonth()
-                    && i.getStartDate().getYear() == finalDate.getYear()) {
-                immigrationsOnDay.add(i);
+        List<ImmigrationInformation> immigrationsByDay = new ArrayList<>();
+        immigrations.forEach(i->{
+            if(from.compareTo(i.getStartDate())<=0 &&i.getStartDate().compareTo(to)<=0 ){
+                immigrationsByDay.add(i);
             }
         });
-        return immigrationsOnDay;
+        return immigrationsByDay.size();
     }
 
     //Thông tin xuất nhập cảnh theo mục đích
     @Override
-    public List<ImmigrationInformation> ImmigrationInformationByPurpose(String purposeName) {
-        return immigrationRepository.ImmigrationInformationByPurpose(purposeName);
+    public Long countImmigrationByPurpose(String purposeName) {
+        return immigrationRepository.countImmigrationByPurpose(purposeName);
     }
 
-    //Thông tin xuất nhập cảnh trong ngày theo mục đích
+    //Thông tin xuất nhập cảnh theo ngày theo mục đích
     @Override
-    public List<ImmigrationInformation> ImmigrationInforOnDayByPurpose(String purposeName) {
+    public Integer countImmigrationByDayByPurpose(String purposeName,Date from, Date to) {
         Date date = new java.util.Date();
         List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationInformationByPurpose(purposeName);
-        List<ImmigrationInformation> immigrationsOnDay = new ArrayList<>();
-        Date finalDate = date;
-        immigrations.forEach(i -> {
-            if (i.getStartDate().getDate() == finalDate.getDate()
-                    && i.getStartDate().getMonth() == finalDate.getMonth()
-                    && i.getStartDate().getYear() == finalDate.getYear()) {
-                immigrationsOnDay.add(i);
+        List<ImmigrationInformation> immigrationsByDay = new ArrayList<>();
+        immigrations.forEach(i->{
+            if(from.compareTo(i.getStartDate())<=0 &&i.getStartDate().compareTo(to)<=0 ){
+                immigrationsByDay.add(i);
             }
         });
-        return immigrationsOnDay;
+        return immigrationsByDay.size();
     }
 
     //Thông tin xuất nhập chảnh theo chiều
     @Override
-    public List<ImmigrationInformation> ImmigrationInformationByDirection(String direction) {
+    public List<ImmigrationInformation> ImmigrationByDirection(String direction) {
         return immigrationRepository.ImmigrationInformationByDirection(direction);
+    }
+
+    @Override
+    public Integer countImmigrationByDirection(String direction) {
+        List<ImmigrationInformation> immigrations = immigrationRepository.ImmigrationInformationByDirection(direction);
+        return immigrations.size();
     }
 
 

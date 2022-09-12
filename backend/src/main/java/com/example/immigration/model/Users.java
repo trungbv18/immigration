@@ -1,9 +1,11 @@
 package com.example.immigration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -43,6 +45,7 @@ public class Users {
     @Basic
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -50,11 +53,18 @@ public class Users {
     private Set<Roles> roles = new HashSet<>();
     public Users() {
     }
-    public Users(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+   ;
+    @OneToMany(mappedBy = "usersByUserId")
+    @JsonIgnore
+    private Collection<ImmigrationInformation> immigrationInformationsById;
+    @OneToMany(mappedBy = "usersByUserId")
+    @JsonIgnore
+    private Collection<Identitycard> identitycardsById;
+    @OneToMany(mappedBy = "usersByUserId")
+    @JsonIgnore
+    private Collection<License> licensesById;
+
+    
 
 }
 

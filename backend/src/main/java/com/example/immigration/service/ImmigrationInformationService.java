@@ -3,6 +3,7 @@ package com.example.immigration.service;
 
 import com.example.immigration.model.ImmigrationInformation;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,27 +11,30 @@ public interface ImmigrationInformationService {
     List<ImmigrationInformation> getAllImmigrationInfor();
 
     //Thông tin xuất nhập cảnh  theo loại giấy tờ
-    List<ImmigrationInformation> getImmigrationInforByCardName(String typeOfCardName);
+    Long countImmigrationByCardName(String typeOfCardName);
     //Thông tin xuất nhập cảnh trong ngày theo loại giấy tờ
-    List<ImmigrationInformation> getImmigrationInforOnDayByCarName(String typeOfCardName);
+    Integer getImmigrationInforByDayByCardName(String typeOfCardName, Date from, Date to);
 
     //Thông tin xuất nhập cảnh theo quốc tịch
-    List<ImmigrationInformation> ImmigrationInformationByNationality(String nationality);
+    Long countImmigrationByNationality(String nationality);
     //Thông tin xuất nhập cảnh trong ngày theo quốc tịch
-    List<ImmigrationInformation> ImmigrationInforOnDayByNationality(String nationality);
+    Integer countImmigrationByDayByNationality(String nationality,Date from, Date to);
 
     //Thông tin xuất nhập cảnh theo loại giấy phép
-    List<ImmigrationInformation> ImmigrationInformationByTypeOfLicense(String typeOfLicense);
-    //Thông tin xuất nhập cảnh trong ngày theo loại giấy phép
-    List<ImmigrationInformation> ImmigrationInforOnDayByTypeOfLicense(String typeOfLicense);
+    Long countImmigrationByTypeOfLicense(String typeOfLicense);
+    //Thông tin xuất nhập cảnh theo ngày theo loại giấy phép
+    Integer countImmigrationByDayByTypeOfLicense(String typeOfLicense ,Date from, Date to);
 
     //Thông tin xuất nhập cảnh theo mục đích
-    List<ImmigrationInformation> ImmigrationInformationByPurpose(String purposeName);
-    //Thông tin xuất nhập cảnh trong ngày theo mục đích
-    List<ImmigrationInformation> ImmigrationInforOnDayByPurpose(String purposeName);
+    Long countImmigrationByPurpose(String purposeName);
+    //Thông tin xuất nhập cảnh theo ngày theo mục đích
+    Integer countImmigrationByDayByPurpose(String purposeName,Date from, Date to);
 
     //Thông tin xuất nhập cảnh theo chiều
-    List<ImmigrationInformation> ImmigrationInformationByDirection(String direction);
+    List<ImmigrationInformation> ImmigrationByDirection(String direction);
+
+    //Thông tin xuất nhập cảnh theo chiều
+    Integer countImmigrationByDirection(String direction);
 
     //Thêm
     ImmigrationInformation saveImmigration(ImmigrationInformation immigration);

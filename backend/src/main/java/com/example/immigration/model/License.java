@@ -3,6 +3,8 @@ package com.example.immigration.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -13,15 +15,19 @@ public class License {
     @Column(name = "id")
     private long id;
     @Basic
+    @NotEmpty
     @Column(name = "license_number")
     private String licenseNumber;
     @Basic
+    @NotNull
     @Column(name = "issued_on")
     private Date issuedOn;
     @Basic
+    @NotNull
     @Column(name = "date_of_expiry")
     private Date dateOfExpiry;
     @Basic
+    @NotNull
     @Column(name = "place_of_issue")
     private String placeOfIssue;
     @OneToMany(mappedBy = "licenseByLicenseId")
