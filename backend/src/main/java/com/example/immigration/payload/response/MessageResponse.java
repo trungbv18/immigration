@@ -1,17 +1,17 @@
 package com.example.immigration.payload.response;
 
 public class MessageResponse {
-    private String msg;
+  private String message;
 
-    public MessageResponse(String msg) {
-        this.msg = msg;
-    }
+  public MessageResponse(String message) {
+    this.message = message;
+  }
 
-    public String getMsg() {
-        return msg;
-    }
+  public String getMessage() {
+    return message;
+  }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }
