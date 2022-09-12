@@ -30,6 +30,7 @@ public class Users {
     @Basic
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
+<<<<<<< Updated upstream
     @OneToMany(mappedBy = "usersByUserId")
     @JsonIgnore
     private Collection<ImmigrationInformation> immigrationInformationsById;
@@ -56,6 +57,18 @@ public class Users {
     }
 
     public void setEmail(String email) {
+=======
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Roles> roles = new HashSet<>();
+    public Users() {
+    }
+    public Users(String username, String email, String password) {
+        this.username = username;
+>>>>>>> Stashed changes
         this.email = email;
     }
 

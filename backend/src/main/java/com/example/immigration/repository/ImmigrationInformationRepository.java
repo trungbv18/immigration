@@ -12,16 +12,33 @@ import java.util.List;
 @Repository
 public interface ImmigrationInformationRepository extends JpaRepository<ImmigrationInformation,Long> {
 
-    //Thông tin xuất nhập cảnh  theo loại giấy tờ
+    //Thống kê lượt xuất nhập cảnh  theo loại giấy tờ
+    @Query(value = "select count (i.id) from ImmigrationInformation  i inner join Identitycard ic " +
+            "on i.identitycardByIdentirycardId.id = ic.id inner join TypeofIdentitycard tIc " +
+            "on ic.typeofIdentitycardByTypeId.id = tIc.id where tIc.name = ?1 ")
+    Long countImmigrationByCardName(String typeOfCardName);
+
+    //Thông tin  xuất nhập cảnh  theo loại giấy tờ
     @Query(value = "select i from ImmigrationInformation  i inner join Identitycard ic " +
             "on i.identitycardByIdentirycardId.id = ic.id inner join TypeofIdentitycard tIc " +
             "on ic.typeofIdentitycardByTypeId.id = tIc.id where tIc.name = ?1 ")
-    List<ImmigrationInformation> ImmigrationInformationByCardName(String typeOfCardName);
+    List<ImmigrationInformation> ImmigrationByCardName(String typeOfCardName);
+
+    //Thông tin số lần xuất nhập cảnh theo quốc tịch
+    @Query(value = "select count (i.id) from ImmigrationInformation i inner join Users u " +
+            "on u.id = i.usersByUserId.id where u.nationality = ?1")
+    Long countImmigrationByNationality(String nationality);
 
     //Thông tin xuất nhập cảnh theo quốc tịch
     @Query(value = "select i from ImmigrationInformation i inner join Users u " +
             "on u.id = i.usersByUserId.id where u.nationality = ?1")
     List<ImmigrationInformation> ImmigrationInformationByNationality(String nationality);
+
+    //Thông tin số lần xuất nhập cảnh theo loại giấy phép
+    @Query(value = "select count (i.id) from ImmigrationInformation i inner join License l " +
+            "on i.licenseByLicenseId.id = l.id inner join TypeOfLicense tl " +
+            "on l.typeOfLicenseByTypeId.id = tl.id where tl.name = ?1")
+    Long countImmigrationByTypeOfLicense(String typeOfLicense);
 
     //Thông tin xuất nhập cảnh theo loại giấy phép
     @Query(value = "select  i from ImmigrationInformation i inner join License l " +
@@ -29,10 +46,17 @@ public interface ImmigrationInformationRepository extends JpaRepository<Immigrat
             "on l.typeOfLicenseByTypeId.id = tl.id where tl.name = ?1")
     List<ImmigrationInformation> ImmigrationInformationByTypeOfLicense(String typeOfLicense);
 
+    //Thông tin số lần xuất nhập cảnh theo mục đích
+    @Query(value = "select count (i.id) from ImmigrationInformation i inner join Purpose p " +
+            "on i.purposeByPurposeId.id = p.id where p.name = ?1")
+    Long countImmigrationByPurpose(String purposeName);
+
     //Thông tin xuất nhập cảnh theo mục đích
     @Query(value = "select i from ImmigrationInformation i inner join Purpose p " +
             "on i.purposeByPurposeId.id = p.id where p.name = ?1")
     List<ImmigrationInformation> ImmigrationInformationByPurpose(String purposeName);
+
+
 
     //Thông tin xuất nhập cảnh theo chiều
     @Query(value = "select i from ImmigrationInformation  i inner join Direction d " +
