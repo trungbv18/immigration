@@ -1,14 +1,19 @@
 package com.example.immigration.controller;
 
-import com.example.immigration.model.Identitycard;
+import com.example.immigration.dto.CountByLicense;
+import com.example.immigration.dto.CountByNationality;
+import com.example.immigration.dto.CountByPurpose;
+import com.example.immigration.dto.CountIdentityCardName;
 import com.example.immigration.model.ImmigrationInformation;
 import com.example.immigration.service.ImmigrationInformationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -101,6 +106,57 @@ public class ImmigrationInformationController {
     @GetMapping("/direction/{direction}")
     public ResponseEntity<List<ImmigrationInformation>> getImmigrationInformationByDirection(@PathVariable("direction") String direction){
         List<ImmigrationInformation> immigrations = immigrationInformationService.ImmigrationInformationByDirection(direction);
+        return ResponseEntity.ok(immigrations);
+    }
+
+    //Thống kê lượt xnc trong ngày theo loại giấy tờ
+    @GetMapping("/countIdentityCardNameOnDay")
+    public ResponseEntity<List<CountIdentityCardName>> countIdentityCardNameOnDay(){
+        List<CountIdentityCardName> immigrations = immigrationInformationService.countIdentityCardNameOnDay();
+        return ResponseEntity.ok(immigrations);
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy tờ
+    //ex:gồm 3 tham số truyền vào: localhost:9091/api/immigrationInformation/countIdentityCardName?name=name1&startDate=2022-09-09&endDate=2022-09-12
+    @GetMapping("/countIdentityCardName")
+    public ResponseEntity<List<CountIdentityCardName>> countIdentityCardName(
+            @RequestParam("name") String name,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate){
+        List<CountIdentityCardName> immigrations = immigrationInformationService.countIdentityCardName(name, startDate, endDate);
+        return ResponseEntity.ok(immigrations);
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo quốc tịch
+    //ex:gồm 3 tham số truyền vào: localhost:9091/api/immigrationInformation/countByNationality?name=name1&startDate=2022-09-09&endDate=2022-09-12
+    @GetMapping("/countByNationality")
+    public ResponseEntity<List<CountByNationality>> countByNationality(
+            @RequestParam("name") String name,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate){
+        List<CountByNationality> immigrations = immigrationInformationService.countByNationality(name, startDate, endDate);
+        return ResponseEntity.ok(immigrations);
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
+    //ex:gồm 3 tham số truyền vào: localhost:9091/api/immigrationInformation/countByLicense?name=type1&startDate=2022-09-09&endDate=2022-09-12
+    @GetMapping("/countByLicense")
+    public ResponseEntity<List<CountByLicense>> countByLicense(
+            @RequestParam("name") String name,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate){
+        List<CountByLicense> immigrations = immigrationInformationService.countByLicense(name, startDate, endDate);
+        return ResponseEntity.ok(immigrations);
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo mục đích
+    //ex:gồm 3 tham số truyền vào: localhost:9091/api/immigrationInformation/countByPurpose?name=type1&startDate=2022-09-09&endDate=2022-09-12
+    @GetMapping("/countByPurpose")
+    public ResponseEntity<List<CountByPurpose>> countByPurpose(
+            @RequestParam("name") String name,
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate){
+        List<CountByPurpose> immigrations = immigrationInformationService. countByPurpose(name, startDate, endDate);
         return ResponseEntity.ok(immigrations);
     }
 }

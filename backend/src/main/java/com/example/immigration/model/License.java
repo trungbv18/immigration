@@ -37,6 +37,11 @@ public class License {
     @OneToMany(mappedBy = "licenseByLicenseId")
     @JsonIgnore
     private Collection<ImmigrationInformation> immigrationInformationsById;
+
+    // nối với class dto
+    @Basic
+    @Column(name = "type_id", insertable = false, updatable = false)
+    private Long typeId;
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private TypeOfLicense typeOfLicenseByTypeId;

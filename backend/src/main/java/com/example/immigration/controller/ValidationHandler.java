@@ -32,7 +32,7 @@ public class ValidationHandler extends
 
             String fieldName = ((FieldError) error).getField();
             String message = error.getDefaultMessage();
-            errors.put(fieldName, message);
+            errors.put("message: ", message);
         });
         return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
 

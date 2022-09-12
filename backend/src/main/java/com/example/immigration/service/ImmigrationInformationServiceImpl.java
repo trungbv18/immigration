@@ -1,5 +1,9 @@
 package com.example.immigration.service;
 
+import com.example.immigration.dto.CountByLicense;
+import com.example.immigration.dto.CountByNationality;
+import com.example.immigration.dto.CountByPurpose;
+import com.example.immigration.dto.CountIdentityCardName;
 import com.example.immigration.model.ImmigrationInformation;
 import com.example.immigration.repository.ImmigrationInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +53,46 @@ public class ImmigrationInformationServiceImpl implements ImmigrationInformation
     @Override
     public List<ImmigrationInformation> getImmigrationInforByCardName(String typeOfCardName) {
         return immigrationRepository.ImmigrationInformationByCardName(typeOfCardName);
+    }
+
+    //Thống kê lượt xnc trong ngày theo loại giấy tờ
+    @Override
+    public List<CountIdentityCardName> countIdentityCardNameOnDay() {
+        Date date = new  java.util.Date();
+        List<CountIdentityCardName> countIdentityCardNames = immigrationRepository.countIdentityCardNameOnDay();
+        List<CountIdentityCardName> countIdentityCardNamesOnDay = new ArrayList<>();
+        Date finalDate = date;
+
+        countIdentityCardNames.forEach(i->{
+            if(i.getStartDate().getDate() == finalDate.getDate()
+                    && i.getStartDate().getMonth() == finalDate.getMonth()
+                    && i.getStartDate().getYear() == finalDate.getYear()){
+                countIdentityCardNamesOnDay.add(i);
+            }
+        });
+        return countIdentityCardNamesOnDay;
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy tờ
+    @Override
+    public List<CountIdentityCardName> countIdentityCardName(String name, Date startDate, Date endDate) {
+        return immigrationRepository.countIdentityCardName(name, startDate, endDate);
+    }
+
+    //Thống kê lượt xnc form ngày to ngày theo quốc tịch
+    @Override
+    public List<CountByNationality> countByNationality(String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByNationality(name, startDate, endDate);
+    }
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
+    @Override
+    public List<CountByLicense> countByLicense(String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByLicense(name, startDate, endDate);
+    }
+    //Thống kê lượt xnc form ngày to ngày theo mục đích
+    @Override
+    public List<CountByPurpose> countByPurpose(String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByPurpose(name, startDate, endDate);
     }
 
     //Thong tin xuat nhap canh trong ngày theo loai giay to

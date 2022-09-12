@@ -1,7 +1,6 @@
 package com.example.immigration.service;
 
 import com.example.immigration.model.Direction;
-import com.example.immigration.model.TypeOfLicense;
 import com.example.immigration.repository.DirectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

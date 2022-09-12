@@ -1,8 +1,15 @@
 package com.example.immigration.service;
 
 
+import com.example.immigration.dto.CountByLicense;
+import com.example.immigration.dto.CountByNationality;
+import com.example.immigration.dto.CountByPurpose;
+import com.example.immigration.dto.CountIdentityCardName;
 import com.example.immigration.model.ImmigrationInformation;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,4 +48,20 @@ public interface ImmigrationInformationService {
 
     Optional<ImmigrationInformation> getImmigrationById(Long id);
 
+    //Thống kê lượt xnc trong ngày theo loại giấy tờ
+    List<CountIdentityCardName> countIdentityCardNameOnDay();
+
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy tờ
+    List<CountIdentityCardName> countIdentityCardName(@Param("name") String name, @Param("start") Date startDate,
+                                                      @Param("end") Date endDate);
+
+    //Thống kê lượt xnc form ngày to ngày theo quốc tịch
+    List<CountByNationality> countByNationality(@Param("name") String name, @Param("start") Date startDate,
+                                                @Param("end") Date endDate);
+
+    //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
+    List<CountByLicense> countByLicense(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+
+    //Thống kê lượt xnc form ngày to ngày theo mục đích
+    List<CountByPurpose> countByPurpose(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
 }

@@ -1,6 +1,5 @@
 package com.example.immigration.controller;
 
-import com.example.immigration.model.License;
 import com.example.immigration.model.Purpose;
 import com.example.immigration.service.PurposeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -20,12 +20,16 @@ public class Ban {
     private long id;
     @Basic
     @Column(name = "effect_from")
+    @NotNull(message = "effectFrom Date is mandatory")
+//    @PastOrPresent(message = "effectFrom not found") không nhập được ngày tương lai
     private Date effectFrom;
     @Basic
     @Column(name = "expire_date")
+    @NotNull(message = "expire Date is mandatory")
     private Date expireDate;
     @ManyToOne
     @JoinColumn(name = "identirycard_id", referencedColumnName = "id")
+    @NotNull(message = "IdentityCardId is mandatory")
     private Identitycard identitycardByIdentirycardId;
 
 }
