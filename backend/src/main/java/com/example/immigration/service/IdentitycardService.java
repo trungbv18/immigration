@@ -14,5 +14,6 @@ public interface IdentitycardService {
 
     void deleteById(Long id);
     Long getLastId();
-
+    
 }
+
