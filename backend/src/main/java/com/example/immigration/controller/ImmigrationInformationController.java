@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-<<<<<<< Updated upstream
-@RequestMapping("api/immigrationInformation")
-=======
+
 @RequestMapping("/api/immigrationInformation")
 @CrossOrigin(value = "*", maxAge = 3600)
->>>>>>> Stashed changes
 public class ImmigrationInformationController {
     @Autowired
     ImmigrationInformationServiceImpl immigrationInformationService;

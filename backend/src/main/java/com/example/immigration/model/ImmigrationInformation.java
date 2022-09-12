@@ -34,8 +34,8 @@ public class ImmigrationInformation {
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private Users usersByUserId;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    private Customer customerByCustomerId;
     @ManyToOne
     @NotNull
     @JoinColumn(name = "direction_id", referencedColumnName = "id", nullable = false)
@@ -115,12 +115,12 @@ public class ImmigrationInformation {
         return result;
     }
 
-    public Users getUsersByUserId() {
-        return usersByUserId;
+    public Customer getCustomerByCustomerId() {
+        return customerByCustomerId;
     }
 
-    public void setUsersByUserId(Users usersByUserId) {
-        this.usersByUserId = usersByUserId;
+    public void setCustomerByCustomerId(Customer customerByCustomerId) {
+        this.customerByCustomerId = customerByCustomerId;
     }
 
     public Direction getDirectionByDirectionId() {

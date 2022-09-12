@@ -25,13 +25,13 @@ public interface ImmigrationInformationRepository extends JpaRepository<Immigrat
     List<ImmigrationInformation> ImmigrationByCardName(String typeOfCardName);
 
     //Thông tin số lần xuất nhập cảnh theo quốc tịch
-    @Query(value = "select count (i.id) from ImmigrationInformation i inner join Users u " +
-            "on u.id = i.usersByUserId.id where u.nationality = ?1")
+    @Query(value = "select count (i.id) from ImmigrationInformation i inner join Customer c " +
+            "on c.id = i.customerByCustomerId.id where c.nationality = ?1")
     Long countImmigrationByNationality(String nationality);
 
     //Thông tin xuất nhập cảnh theo quốc tịch
-    @Query(value = "select i from ImmigrationInformation i inner join Users u " +
-            "on u.id = i.usersByUserId.id where u.nationality = ?1")
+    @Query(value = "select i from ImmigrationInformation i inner join Customer c " +
+            "on c.id = i.customerByCustomerId.id where c.nationality = ?1")
     List<ImmigrationInformation> ImmigrationInformationByNationality(String nationality);
 
     //Thông tin số lần xuất nhập cảnh theo loại giấy phép
@@ -64,8 +64,8 @@ public interface ImmigrationInformationRepository extends JpaRepository<Immigrat
     List<ImmigrationInformation> ImmigrationInformationByDirection(String direction);
 
     //Lịch sử xuất nhập cảnh của từng người
-    @Query(value = "select i from ImmigrationInformation i inner join Users u " +
-            "on i.usersByUserId.id = i.id where i.id =?1")
-    List<ImmigrationInformation> ImmigrationInformationByUserId(Long userId);
+    @Query(value = "select i from ImmigrationInformation i inner join Customer c " +
+            "on i.customerByCustomerId.id = c.id where c.id =?1")
+    List<ImmigrationInformation> ImmigrationInformationByUserId(Long customerId);
 
 }

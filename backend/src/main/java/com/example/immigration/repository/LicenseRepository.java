@@ -1,5 +1,6 @@
 package com.example.immigration.repository;
 
+import com.example.immigration.model.Customer;
 import com.example.immigration.model.License;
 import com.example.immigration.model.TypeOfLicense;
 import com.example.immigration.model.Users;
@@ -10,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface LicenseRepository extends JpaRepository<License,Long> {
-    List<License> getAllByUsersByUserId(Users user);
+    List<License> getAllByCustomerByCustomerId(Customer customer);
     List<License> getAllByTypeOfLicenseByTypeId(TypeOfLicense type);
 }
