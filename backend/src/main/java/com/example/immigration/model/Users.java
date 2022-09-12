@@ -64,7 +64,8 @@ public class Users {
     @JsonIgnore
     private Collection<License> licensesById;
 
-    
 
+    public Users(String username, String email, String encode) {
+    }
 }
 
