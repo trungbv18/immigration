@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 
@@ -28,6 +29,7 @@ public class ImmigrationInformation {
     private String destination;
     @Basic
     @Column(name = "return_date")
+    @NotNull(message = " return Date is mandatory")
     private Date returnDate;
 
     @Basic
@@ -42,6 +44,7 @@ public class ImmigrationInformation {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "UserId is mandatory")
     private Users usersByUserId;
     // nối với class dto
     @Basic
@@ -49,6 +52,7 @@ public class ImmigrationInformation {
     private Long directionId;
     @ManyToOne
     @JoinColumn(name = "direction_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "directionId is mandatory")
     private Direction directionByDirectionId;
 
     // nối với class dto
@@ -57,6 +61,7 @@ public class ImmigrationInformation {
     private Long purposeId;
     @ManyToOne
     @JoinColumn(name = "purpose_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "purposeId is mandatory")
     private Purpose purposeByPurposeId;
 
     // nối với class dto
@@ -65,6 +70,7 @@ public class ImmigrationInformation {
     private Long identityCardId;
     @ManyToOne
     @JoinColumn(name = "identirycard_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "identityCardId is mandatory")
     private Identitycard identitycardByIdentirycardId;
 
     // nối với class dto
@@ -73,6 +79,7 @@ public class ImmigrationInformation {
     private Long licenseId;
     @ManyToOne
     @JoinColumn(name = "license_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "licenseId is mandatory")
     private License licenseByLicenseId;
 
 }

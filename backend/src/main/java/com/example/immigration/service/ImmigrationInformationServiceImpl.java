@@ -75,24 +75,24 @@ public class ImmigrationInformationServiceImpl implements ImmigrationInformation
 
     //Thống kê lượt xnc form ngày to ngày theo loại giấy tờ
     @Override
-    public List<CountIdentityCardName> countIdentityCardName(String name, Date startDate, Date endDate) {
-        return immigrationRepository.countIdentityCardName(name, startDate, endDate);
+    public List<CountIdentityCardName> countIdentityCardName(String direction, String name, Date startDate, Date endDate) {
+        return immigrationRepository.countIdentityCardName(direction ,name, startDate, endDate);
     }
 
     //Thống kê lượt xnc form ngày to ngày theo quốc tịch
     @Override
-    public List<CountByNationality> countByNationality(String name, Date startDate, Date endDate) {
-        return immigrationRepository.countByNationality(name, startDate, endDate);
+    public List<CountByNationality> countByNationality(String direction, String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByNationality(direction, name, startDate, endDate);
     }
     //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
     @Override
-    public List<CountByLicense> countByLicense(String name, Date startDate, Date endDate) {
-        return immigrationRepository.countByLicense(name, startDate, endDate);
+    public List<CountByLicense> countByLicense(String direction, String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByLicense(direction, name, startDate, endDate);
     }
     //Thống kê lượt xnc form ngày to ngày theo mục đích
     @Override
-    public List<CountByPurpose> countByPurpose(String name, Date startDate, Date endDate) {
-        return immigrationRepository.countByPurpose(name, startDate, endDate);
+    public List<CountByPurpose> countByPurpose(String direction, String name, Date startDate, Date endDate) {
+        return immigrationRepository.countByPurpose(direction, name, startDate, endDate);
     }
 
     //Thong tin xuat nhap canh trong ngày theo loai giay to

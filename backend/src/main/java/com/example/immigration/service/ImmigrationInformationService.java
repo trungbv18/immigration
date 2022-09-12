@@ -52,16 +52,18 @@ public interface ImmigrationInformationService {
     List<CountIdentityCardName> countIdentityCardNameOnDay();
 
     //Thống kê lượt xnc form ngày to ngày theo loại giấy tờ
-    List<CountIdentityCardName> countIdentityCardName(@Param("name") String name, @Param("start") Date startDate,
+    List<CountIdentityCardName> countIdentityCardName(@Param("direction") String direction, @Param("name") String name, @Param("start") Date startDate,
                                                       @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo quốc tịch
-    List<CountByNationality> countByNationality(@Param("name") String name, @Param("start") Date startDate,
-                                                @Param("end") Date endDate);
+    List<CountByNationality> countByNationality(@Param("direction") String direction, @Param("name") String name,
+                                                @Param("start") Date startDate, @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
-    List<CountByLicense> countByLicense(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+    List<CountByLicense> countByLicense(@Param("direction") String direction, @Param("name") String name,
+                                        @Param("start") Date startDate, @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo mục đích
-    List<CountByPurpose> countByPurpose(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+    List<CountByPurpose> countByPurpose(@Param("direction") String direction, @Param("name") String name,
+                                        @Param("start") Date startDate, @Param("end") Date endDate);
 }

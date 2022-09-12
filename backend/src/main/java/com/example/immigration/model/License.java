@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -26,9 +27,11 @@ public class License {
     private String licenseNumber;
     @Basic
     @Column(name = "issued_on")
+    @NotNull(message = " issuedOn Date is mandatory")
     private Date issuedOn;
     @Basic
     @Column(name = "date_of_expiry")
+    @NotNull(message = " Date Of Expiry is mandatory")
     private Date dateOfExpiry;
     @Basic
     @Column(name = "place_of_issue")
@@ -44,8 +47,10 @@ public class License {
     private Long typeId;
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "typeId is mandatory")
     private TypeOfLicense typeOfLicenseByTypeId;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @NotNull(message = "UserId is mandatory")
     private Users usersByUserId;
 }

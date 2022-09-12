@@ -60,25 +60,29 @@ public interface ImmigrationInformationRepository extends JpaRepository<Immigrat
     @Query("select new com.example.immigration.dto.CountIdentityCardName (ii.startDate, d.name, ti.name, count(ti.name))" +
             "from ImmigrationInformation ii inner join Identitycard i on ii.identityCardId = i.id " +
             "inner join TypeofIdentitycard ti on i.typeOfIdentityCardId = ti.id " +
-            "inner join Direction d on ii.directionId = d.id where ti.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, ti.name")
-    List<CountIdentityCardName> countIdentityCardName(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+            "inner join Direction d on ii.directionId = d.id where d.name=:direction and ti.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, ti.name")
+    List<CountIdentityCardName> countIdentityCardName(@Param("direction") String direction,  @Param("name") String name,
+                                                      @Param("start") Date startDate, @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo quốc tịch
     @Query("select new com.example.immigration.dto.CountByNationality (ii.startDate, d.name, u.nationality, count(u.nationality))" +
             "from ImmigrationInformation ii inner join Users u on ii.userId = u.id " +
-            "inner join Direction d on ii.directionId = d.id where u.nationality=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, u.nationality")
-    List<CountByNationality> countByNationality(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+            "inner join Direction d on ii.directionId = d.id where d.name=:direction and d.name=:direction and u.nationality=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, u.nationality")
+    List<CountByNationality> countByNationality(@Param("direction") String direction, @Param("name") String name,
+                                                @Param("start") Date startDate, @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo loại giấy phép
     @Query("select new com.example.immigration.dto.CountByLicense (ii.startDate, d.name, tl.name, count(tl.name))" +
             "from ImmigrationInformation ii inner join License l on ii.licenseId = l.id inner join TypeOfLicense tl on l.typeId = tl.id" +
-            " inner join Direction d on ii.directionId = d.id where tl.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, tl.name")
-    List<CountByLicense> countByLicense(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+            " inner join Direction d on ii.directionId = d.id where d.name=:direction and d.name=:direction and tl.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, tl.name")
+    List<CountByLicense> countByLicense(@Param("direction") String direction, @Param("name") String name,
+                                        @Param("start") Date startDate, @Param("end") Date endDate);
 
     //Thống kê lượt xnc form ngày to ngày theo mục đích
     @Query("select new com.example.immigration.dto.CountByPurpose (ii.startDate, d.name, p.name, count(p.name))" +
             "from ImmigrationInformation ii inner join Purpose p on ii.purposeId = p.id " +
-            "inner join Direction d on ii.directionId = d.id where p.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, p.name")
-    List<CountByPurpose> countByPurpose(@Param("name") String name, @Param("start") Date startDate, @Param("end") Date endDate);
+            "inner join Direction d on ii.directionId = d.id where d.name=:direction and p.name=:name AND ii.startDate BETWEEN :start AND :end  group by ii.startDate, d.name, p.name")
+    List<CountByPurpose> countByPurpose(@Param("direction") String direction, @Param("name") String name,
+                                        @Param("start") Date startDate, @Param("end") Date endDate);
 
 }
