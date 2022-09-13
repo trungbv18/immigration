@@ -13,6 +13,6 @@ import java.util.List;
 public interface LicenseRepository extends JpaRepository<License,Long> {
     List<License> getAllByUsersByUserId(Users user);
     List<License> getAllByTypeOfLicenseByTypeId(TypeOfLicense type);
-    @Query(value = "SELECT id FROM License ORDER BY id DESC LIMIT 1;", nativeQuery = true)
+    @Query(value = "SELECT TOP 1 id FROM License ORDER BY id DESC", nativeQuery = true)
     Long selectLastId();
 }

@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<Users, Long> {
     Optional<Users> findByUsername(String username);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
-    @Query(value = "SELECT id FROM Users ORDER BY id DESC LIMIT 1;", nativeQuery = true)
+    @Query(value = "SELECT TOP 1 id FROM Users ORDER BY id DESC", nativeQuery = true)
     Long selectLastId();
 }

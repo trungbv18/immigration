@@ -19,6 +19,11 @@ public class BanServiceImpl implements BanService{
     }
 
     @Override
+    public Long findIdenNum(String iden) {
+        return banRepository.findIdenNum(iden);
+    }
+
+    @Override
     public void save(Ban ban) {
         banRepository.save(ban);
     }

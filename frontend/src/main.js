@@ -116,7 +116,7 @@ const routes = [
     component: Landing,
   },
   {
-    path: "/profile",
+    path: "/add-info",
     component: Profile,
     meta: { requiresAuth: true },
 

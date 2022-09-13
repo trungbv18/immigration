@@ -15,7 +15,7 @@
     <section class="relative py-16 bg-blueGray-200">
       <div class="container mx-auto px-4">
         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-          <Form id="customer_info" @submit="submit" :validation-schema="valid_customer" class="px-3">
+          <Form id="customer_info" @submit="submit" :validation-schema="valid_customer" class="hidden px-3">
             <div v-if="!successful">
               <h6 class="text-center text-emerald-600 text-sm mt-3 mb-6 font-bold uppercase">
                 Customer Information
@@ -77,7 +77,7 @@
             </div>
           </Form>
 
-          <Form @submit="save" id="customer_license" :validation-schema="valid_license" class="hidden px-3">
+          <Form @submit="save" id="customer_license" :validation-schema="valid_license" class="px-3">
             <div v-if="!successful">
               <h6 class="text-center text-emerald-600 text-sm mt-3 mb-6 font-bold uppercase">
                 Identification Information
@@ -97,13 +97,18 @@
                     <ErrorMessage name="id_type" class="text-red-500 text-sm italic" />
                   </div>
                 </div>
-                <div class="w-full lg:w-6/12 px-4">
-                  <div class="relative w-full mb-3">
+                <div class="w-full lg:w-6/12 px-4 flex flex-wrap items-center">
+                  <div class="relative w-6/12 mb-3">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                       Identification Number
                     </label>
                     <Field type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="id_number" name="id_number" />
                     <ErrorMessage name="id_number" class="text-red-500 text-sm italic" />
+                  </div>
+                  <div class="relative w-6/12 pl-4 mt-2">
+                    <button :disabled="id_number.length<9" @click="checkBan" class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
+                      Check ID Number
+                    </button>
                   </div>
                 </div>
                 <div class="w-full lg:w-6/12 px-4">
@@ -133,6 +138,7 @@
                     <ErrorMessage name="id_place" class="text-red-500 text-sm italic" />
                   </div>
                 </div>
+                <div class="w-full lg:w-6/12 px-4"></div>
               </div>
               <h6 class="text-center text-emerald-600 text-sm mt-3 mb-6 font-bold uppercase">
                 License Information
@@ -231,7 +237,7 @@
                     <ErrorMessage name="purpose" class="text-red-500 text-sm italic" />
                   </div>
                 </div>
-                
+
                 <div class="w-full lg:w-6/12 px-4">
                   <div class="relative w-full mb-3">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
@@ -300,6 +306,7 @@ import IdCardService from "../services/IdCardService";
 import PurposeService from "../services/PurposeService";
 import DirectionService from "../services/DirectionService";
 import ImmigrationService from "../services/ImmigrationService";
+import BanService from "../services/BanService";
 
 import swal from "sweetalert";
 import {
@@ -389,10 +396,10 @@ export default {
       id_date: "",
       id_ex_date: "",
       id_place: "",
-      destination:"",
-      purpose:"",
-      direction:"",
-      return_date:"",
+      destination: "",
+      purpose: "",
+      direction: "",
+      return_date: "",
     };
   },
   methods: {
@@ -447,8 +454,9 @@ export default {
         })
         .then(() => {
           document.getElementById("customer_license").style.display = "none";
-          document.getElementById("customer_immigration").style.display = "block";
+          document.getElementById("customer_immigration").style.display =
             "block";
+          ("block");
           this.lastIdLiFinal = this.lastIdLi + 1;
           this.lastIdCaFinal = this.lastIdCa + 1;
         })
@@ -459,29 +467,39 @@ export default {
           });
         });
     },
-    
+
     saveImmigration() {
       let data = {
         destination: this.destination,
         returnDate: this.return_date,
         startDate: this.date,
-        usersByUserId: { id: this.lastIdFinal },
-        directionByDirectionId : { id: this.direction },
-        purposeByPurposeId: { id: this.purpose},
-        identitycardByIdentirycardId: { id : this.lastIdCaFinal },
-        licenseByLicenseId: { id: this.lastIdLiFinal }
-      }
+        usersByUserId: {
+          id: this.lastIdFinal
+        },
+        directionByDirectionId: {
+          id: this.direction
+        },
+        purposeByPurposeId: {
+          id: this.purpose
+        },
+        identitycardByIdentirycardId: {
+          id: this.lastIdCaFinal
+        },
+        licenseByLicenseId: {
+          id: this.lastIdLiFinal
+        },
+      };
       ImmigrationService.create(data)
-      .then(() => {
+        .then(() => {
           swal("Success!", "Add Successfully!", "success", {
             button: false,
-            timer: 2000
+            timer: 2000,
           });
         })
         .catch(() => {
           swal("Error!", "Add Failed!", "error", {
             button: false,
-            timer: 2000
+            timer: 2000,
           });
         });
     },
@@ -548,6 +566,28 @@ export default {
           console.log(e);
         });
     },
+    checkBan() {
+      BanService.getFromIdNum(this.id_number)
+        .then(() => {
+          swal({
+            title: "Sorry",
+            text: "Sorry " + this.id_number + " was banned",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+          }).then((done) => {
+            if (done) {
+              this.$router.go();
+            }
+          });
+        })
+        .catch(() => {
+          swal("Success!", this.id_number + " check successfully", "success", {
+            button: false,
+            timer: 2000,
+          });
+        });
+    },
   },
   mounted() {
     this.getLicenseType();
@@ -566,12 +606,12 @@ export default {
       var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
       var yyyy = today.getFullYear();
       if (dd < 10) {
-        dd = '0' + dd
+        dd = "0" + dd;
       }
       if (mm < 10) {
-        mm = '0' + mm
+        mm = "0" + mm;
       }
-      today = dd +'-'+mm+'-'+yyyy;
+      today = dd + "-" + mm + "-" + yyyy;
       return today;
       // console.log(date);
     },

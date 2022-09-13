@@ -13,4 +13,5 @@ public interface BanService {
     Optional<Ban> findById(Long id);
 
     void deleteById(Long id);
+    Long findIdenNum(String iden);
 }

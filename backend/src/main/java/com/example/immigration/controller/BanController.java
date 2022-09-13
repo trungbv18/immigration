@@ -18,7 +18,7 @@ public class BanController {
     @Autowired
     BanService banService;
 
-    @GetMapping("/get-all")
+    @GetMapping("get-all")
     public ResponseEntity<List<Ban>> getAll() {
         List<Ban> banLists = banService.findAll();
 
@@ -66,5 +66,14 @@ public class BanController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+    @GetMapping("getFromIdNum/{number}")
+    public ResponseEntity<Long> getFromIdNum( @PathVariable("number") String number){
+        Long id = banService.findIdenNum(number);
+        if (id == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Long>(id, HttpStatus.OK);
+
     }
 }
