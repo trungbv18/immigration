@@ -77,7 +77,7 @@ public class ImmigrationInformationController {
         return ResponseEntity.ok(immigrations);
     }
     //Thông tin xuất nhập cảnh trong ngày theo loại giấy phép
-    @GetMapping("/count/byday/liscense/{liscense}")
+    @GetMapping("/count/byday/license/{license}")
     public ResponseEntity<Integer> getImmigrationInforOnDayByTypeOfLicense(@PathVariable("license") String license,
                                                                            @RequestParam(value = "from") @DateTimeFormat(pattern="yyyy-MM-dd") Date from,
                                                                            @RequestParam(value = "to") @DateTimeFormat(pattern="yyyy-MM-dd") Date to){

@@ -14,8 +14,14 @@ class ImmigrationService {
   countPurposeByDay(purpose,from,to) {
     // return http.post("/api/immigrationInformation", data);
     return http.get(`/api/immigrationInformation/count/byday/purpose/${purpose}?from=${from}&to=${to}`);
-
-
+  }
+  countIdCardByDay(cardName,from,to) {
+    // return http.post("/api/immigrationInformation", data);
+    return http.get(`/api/immigrationInformation/count/byday/identitycard/${cardName}?from=${from}&to=${to}`);
+  }
+  countLicenseByDay(licenseName,from,to) {
+    // return http.post("/api/immigrationInformation", data);
+    return http.get(`/api/immigrationInformation/count/byday/license/${licenseName}?from=${from}&to=${to}`);
   }
 }
 export default new ImmigrationService();
