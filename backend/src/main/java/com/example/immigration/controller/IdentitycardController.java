@@ -50,7 +50,8 @@ public class IdentitycardController {
             identitycardOptional.get().setDateOfExpiry(identitycard.getDateOfExpiry());
             identitycardOptional.get().setImmigrationInformationsById(identitycard.getImmigrationInformationsById());
             identitycardOptional.get().setPlaceOfIssue(identitycard.getPlaceOfIssue());
-            identitycardOptional.get().setUsersByUserId(identitycard.getUsersByUserId());
+            identitycardOptional.get().setCustomerByCustomerId(identitycard.getCustomerByCustomerId());
+
 //            identitycardOptional.get().setId(id);
             return ResponseEntity.ok(identitycardOptional.get());
         }

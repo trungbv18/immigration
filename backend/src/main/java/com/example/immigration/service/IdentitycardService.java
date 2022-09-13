@@ -16,3 +16,4 @@ public interface IdentitycardService {
     Long getLastId();
 
 }
+

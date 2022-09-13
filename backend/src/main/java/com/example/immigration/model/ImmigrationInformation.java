@@ -1,22 +1,29 @@
 package com.example.immigration.model;
 
+import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
 @Table(name = "Immigration_information")
 public class ImmigrationInformation {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private long id;
 
     @Basic
+    @NotNull
     @Column(name = "destination")
     private String destination;
     @Basic
+    @NotNull
     @Column(name = "return_date")
     private Date returnDate;
 
@@ -26,18 +33,24 @@ public class ImmigrationInformation {
     private Date startDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private Users usersByUserId;
+    @NotNull
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    private Customer customerByCustomerId;
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "direction_id", referencedColumnName = "id", nullable = false)
     private Direction directionByDirectionId;
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "purpose_id", referencedColumnName = "id", nullable = false)
     private Purpose purposeByPurposeId;
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "identirycard_id", referencedColumnName = "id", nullable = false)
     private Identitycard identitycardByIdentirycardId;
+
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "license_id", referencedColumnName = "id", nullable = false)
     private License licenseByLicenseId;
 
@@ -102,12 +115,12 @@ public class ImmigrationInformation {
         return result;
     }
 
-    public Users getUsersByUserId() {
-        return usersByUserId;
+    public Customer getCustomerByCustomerId() {
+        return customerByCustomerId;
     }
 
-    public void setUsersByUserId(Users usersByUserId) {
-        this.usersByUserId = usersByUserId;
+    public void setCustomerByCustomerId(Customer customerByCustomerId) {
+        this.customerByCustomerId = customerByCustomerId;
     }
 
     public Direction getDirectionByDirectionId() {

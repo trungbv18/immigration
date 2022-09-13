@@ -3,6 +3,8 @@ package com.example.immigration.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -13,15 +15,19 @@ public class License {
     @Column(name = "id")
     private long id;
     @Basic
+    @NotEmpty
     @Column(name = "license_number")
     private String licenseNumber;
     @Basic
+    @NotNull
     @Column(name = "issued_on")
     private Date issuedOn;
     @Basic
+    @NotNull
     @Column(name = "date_of_expiry")
     private Date dateOfExpiry;
     @Basic
+    @NotNull
     @Column(name = "place_of_issue")
     private String placeOfIssue;
     @OneToMany(mappedBy = "licenseByLicenseId")
@@ -31,8 +37,8 @@ public class License {
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private TypeOfLicense typeOfLicenseByTypeId;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private Users usersByUserId;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    private Customer customerByCustomerId;
 
     public long getId() {
         return id;
@@ -125,11 +131,11 @@ public class License {
         this.typeOfLicenseByTypeId = typeOfLicenseByTypeId;
     }
 
-    public Users getUsersByUserId() {
-        return usersByUserId;
+    public Customer getCustomerByCustomerId() {
+        return customerByCustomerId;
     }
 
-    public void setUsersByUserId(Users usersByUserId) {
-        this.usersByUserId = usersByUserId;
+    public void setCustomerByCustomerId(Customer customerByCustomerId) {
+        this.customerByCustomerId = customerByCustomerId;
     }
 }

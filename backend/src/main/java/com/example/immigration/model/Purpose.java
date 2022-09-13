@@ -3,6 +3,7 @@ package com.example.immigration.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Entity
@@ -12,6 +13,7 @@ public class Purpose {
     @Column(name = "id")
     private long id;
     @Basic
+    @NotNull
     @Column(name = "name")
     private String name;
     @Basic
