@@ -51,8 +51,8 @@ public class ImmigrationInformationController {
     //Thông tin xuất nhập cảnh trong ngày theo loại giấy tờ
     @GetMapping("/count/byday/identitycard/{identitycard}")
     public ResponseEntity<Integer> getImmigrationInforOnDayByCarName(@PathVariable("identitycard") String typeOfCardName,
-                                                                     @RequestParam(value = "from") @DateTimeFormat(pattern="ddMMyyyy") Date from,
-                                                                     @RequestParam(value = "to") @DateTimeFormat(pattern="ddMMyyyy") Date to){
+                                                                     @RequestParam(value = "from") @DateTimeFormat(pattern="yyyy-MM-dd") Date from,
+                                                                     @RequestParam(value = "to") @DateTimeFormat(pattern="yyyy-MM-dd") Date to){
         Integer immigrations = immigrationInformationService.getImmigrationInforByDayByCardName(typeOfCardName,from,to);
         return ResponseEntity.ok(immigrations);
     }
@@ -65,8 +65,8 @@ public class ImmigrationInformationController {
     //Thông tin xuất nhập cảnh theo ngày theo quóc tịch
     @GetMapping("/count/byday/nationality/{nationality}")
     public ResponseEntity<Integer> getImmigrationInforOnDayByNationality(@PathVariable("nationality") String nationality,
-                                                                      @RequestParam(value = "from") @DateTimeFormat(pattern="ddMMyyyy") Date from,
-                                                                      @RequestParam(value = "to") @DateTimeFormat(pattern="ddMMyyyy") Date to){
+                                                                      @RequestParam(value = "from") @DateTimeFormat(pattern="yyyy-MM-dd") Date from,
+                                                                      @RequestParam(value = "to") @DateTimeFormat(pattern="yyyy-MM-dd") Date to){
         Integer immigrations = immigrationInformationService.countImmigrationByDayByNationality(nationality,from,to);
         return ResponseEntity.ok(immigrations);
     }
@@ -79,8 +79,8 @@ public class ImmigrationInformationController {
     //Thông tin xuất nhập cảnh trong ngày theo loại giấy phép
     @GetMapping("/count/byday/liscense/{liscense}")
     public ResponseEntity<Integer> getImmigrationInforOnDayByTypeOfLicense(@PathVariable("license") String license,
-                                                                           @RequestParam(value = "from") @DateTimeFormat(pattern="ddMMyyyy") Date from,
-                                                                           @RequestParam(value = "to") @DateTimeFormat(pattern="ddMMyyyy") Date to){
+                                                                           @RequestParam(value = "from") @DateTimeFormat(pattern="yyyy-MM-dd") Date from,
+                                                                           @RequestParam(value = "to") @DateTimeFormat(pattern="yyyy-MM-dd") Date to){
         Integer immigrations = immigrationInformationService.countImmigrationByDayByTypeOfLicense(license,from,to);
         return ResponseEntity.ok(immigrations);
     }
