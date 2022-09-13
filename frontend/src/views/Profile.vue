@@ -298,7 +298,7 @@ import {
 } from "vee-validate";
 import * as yup from "yup";
 import team2 from "@/assets/img/team-2-800x800.jpg";
-import UserService from "../services/UserService";
+import CustomerService from "../services/CustomerService";
 import LicenseTypeService from "../services/LicenseTypeService";
 import LicenseService from "../services/LicenseService";
 import IdentificationInfo from "../services/IdentificationInfo";
@@ -410,7 +410,7 @@ export default {
         gender: this.gender,
         dateOfBirth: this.birthday,
       };
-      UserService.create(data)
+      CustomerService.create(data)
         .then(() => {
           document.getElementById("customer_info").style.display = "none";
           document.getElementById("customer_license").style.display = "block";
@@ -432,7 +432,7 @@ export default {
         typeOfLicenseByTypeId: {
           id: this.license_type,
         },
-        usersByUserId: {
+        customerByCustomerId: {
           id: this.lastIdFinal,
         },
       };
@@ -443,7 +443,7 @@ export default {
         typeofIdentitycardByTypeId: {
           id: this.id_type,
         },
-        usersByUserId: {
+        customerByCustomerId: {
           id: this.lastIdFinal,
         },
         //thieu ngay cap trong db
@@ -473,7 +473,7 @@ export default {
         destination: this.destination,
         returnDate: this.return_date,
         startDate: this.date,
-        usersByUserId: {
+        customerByCustomerId: {
           id: this.lastIdFinal
         },
         directionByDirectionId: {
@@ -513,7 +513,7 @@ export default {
         });
     },
     getLastId() {
-      UserService.getLastId()
+      CustomerService.getLastId()
         .then((response) => {
           this.lastId = response.data;
         })

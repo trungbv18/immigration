@@ -11,5 +11,11 @@ class ImmigrationService {
   create(data) {
     return http.post("/api/immigrationInformation", data);
   }
+  countPurposeByDay(purpose,from,to) {
+    // return http.post("/api/immigrationInformation", data);
+    return http.get(`/api/immigrationInformation/count/byday/purpose/${purpose}?from=${from}&to=${to}`);
+
+
+  }
 }
 export default new ImmigrationService();

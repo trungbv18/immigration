@@ -1,6 +1,8 @@
 package com.example.immigration.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,6 +10,8 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "customer")
+@Getter
+@Setter
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

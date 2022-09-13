@@ -93,8 +93,8 @@ public class ImmigrationInformationController {
     //Thông tin xuất nhập cảnh trong ngày theo mục dích
     @GetMapping("/count/byday/purpose/{purpose}")
     public ResponseEntity<Integer> getImmigrationInforOnDayByPurpose(@PathVariable("purpose") String purpose,
-                                                                     @RequestParam(value = "from") @DateTimeFormat(pattern="ddMMyyyy") Date from,
-                                                                     @RequestParam(value = "to") @DateTimeFormat(pattern="ddMMyyyy") Date to
+                                                                     @RequestParam(value = "from") @DateTimeFormat(pattern="yyyy-MM-dd") Date from,
+                                                                     @RequestParam(value = "to") @DateTimeFormat(pattern="yyyy-MM-dd") Date to
     ){
         Integer immigrations = immigrationInformationService.countImmigrationByDayByPurpose(purpose,from,to);
         return ResponseEntity.ok(immigrations);
