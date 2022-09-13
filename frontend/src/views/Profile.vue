@@ -15,7 +15,7 @@
     <section class="relative py-16 bg-blueGray-200">
       <div class="container mx-auto px-4">
         <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-          <Form id="customer_info" @submit="submit" :validation-schema="valid_customer" class="hidden px-3">
+          <Form id="customer_info" @submit="submit" :validation-schema="valid_customer" class=" px-3">
             <div v-if="!successful">
               <h6 class="text-center text-emerald-600 text-sm mt-3 mb-6 font-bold uppercase">
                 Customer Information
@@ -98,14 +98,14 @@
                   </div>
                 </div>
                 <div class="w-full lg:w-6/12 px-4 flex flex-wrap items-center">
-                  <div class="relative w-6/12 mb-3">
+                  <div class="relative mb-3" style="width: 70%">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                       Identification Number
                     </label>
                     <Field type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" required v-model="id_number" name="id_number" />
                     <ErrorMessage name="id_number" class="text-red-500 text-sm italic" />
                   </div>
-                  <div class="relative w-6/12 pl-4 mt-2">
+                  <div class="relative pl-4 mt-2" style="width: 30%">
                     <button :disabled="id_number.length<9" @click="checkBan" class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
                       Check ID Number
                     </button>
